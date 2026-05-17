@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAMBILIUS // PREMIUM WORKSTATION</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0a0a0c; 
+            color: #ffffff; 
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .hud-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .glass-panel {
+            background: #111114;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .hud-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #16161a;
+        }
+
+        .hud-logo {
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .hud-logo span {
+            color: #00ffcc; 
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+        }
+
+        .system-status {
+            font-size: 11px;
+            color: #55555c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .pulse-node {
+            width: 6px;
+            height: 6px;
+            background-color: #00ffcc;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffcc;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        .main-block {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 25px;
+        }
+
+        .section-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #00ffcc;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .avatar-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #00ffcc;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+            overflow: hidden;
+            background: #16161a;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: #00ffcc;
+        }
+
+        .hero-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .benefit-card h4 {
+            color: #ffffff;
+            font-size: 13px;
+            margin-bottom: 6px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .benefit-card p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .hud-widget {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .widget-image-holder {
+            width: 100%;
+            height: 140px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .tech-line {
+            font-size: 12px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+        }
+
+        .tech-line span {
+            color: #00ffcc;
+            font-weight: 700;
+        }
+
+        .btn-neon {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #00ffcc;
+            color: #000000;
+            font-size: 11px;
+            font-weight: 900;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 255, 204, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-neon:hover {
+            background: #ffffff;
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .project-card {
+            background: #131316;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 340px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #00ffcc;
+            box-shadow: 0 15px 30px rgba(0, 255, 204, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .project-img-box {
+            width: 100%;
+            height: 160px;
+            background: #16161a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-card__body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .p-code {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .p-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .btn-outline-project {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            margin-top: 15px;
+        }
+
+        .project-card:hover .btn-outline-project {
+            background: #00ffcc;
+            color: #000000;
+            border-color: #00ffcc;
+        }
+
+        .workflow-block {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 25px;
+        }
+
+        .step-list { list-style: none; }
+        .step-list li { font-size: 13px; color: rgba(255, 255, 255, 0.6); margin-bottom: 14px; line-height: 1.6; display: flex; gap: 10px; }
+        .step-list li::before { content: '>'; color: #00ffcc; font-weight: bold; }
+
+        .hud-footer { display: flex; justify-content: space-between; font-size: 11px; color: #44444a; padding: 10px 10px 0 10px; }
+
+        @media (max-width: 1024px) {
+            .main-block, .projects-grid, .workflow-block { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hud-container">
+        
+        <header class="glass-panel hud-header">
+            <div class="hud-logo">BAMBILIUS <span>// WORKSTATION</span></div>
+            <div class="system-status">
+                <div class="pulse-node"></div>
+                <span>CORE_V1.9 // ONLINE</span>
+            </div>
+        </header>
+
+        <section class="main-block">
+            <div class="glass-panel">
+                <span class="section-tag">// IDENTITY_MODULE</span>
+                <div class="profile-header">
+                    <div class="avatar-box">
+                        <!-- Неубиваемый подбор для аватарки -->
+                        <picture>
+                            <source srcset="cyber-avatar.JPG" type="image/jpeg">
+                            <source srcset="cyber-avatar.JPEG" type="image/jpeg">
+                            <img src="cyber-avatar.jpg" alt="Developer Avatar" class="avatar-img">
+                        </picture>
+                    </div>
+                    <h1 class="hero-title">Создаю быстрые сайты на <span>чистом коде</span> в VS Code</h1>
+                </div>
+                <p class="hero-text">
+                    Никаких тяжелых конструкторов и шаблонов с абонентской платой — готовый сайт полностью принадлежит только вам. Пишу чистую семантику, собирая индивидуальный продукт для вашего бизнеса.
+                </p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h4>01 / Независимость</h4>
+                        <p>Код ваш на 100%. Никаких скрытых ежемесячных платежей за сторонние платформы.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>02 / Свобода доработки</h4>
+                        <p>Архитектура понятна любому программисту. Вы легко сможете масштабировать проект.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>03 / Скорость работы</h4>
+                        <p>Код легкий. Сайт летает на смартфонах и открывается за доли секунды.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>04 / Жесткий адаптив</h4>
+                        <p>Идеальное отображение элементов на любых мобильных устройствах, планшетах и ПК.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel hud-widget">
+                <div>
+                    <span class="section-tag">// CORE_DIAGNOSTICS</span>
+                    <div class="widget-image-holder">
+                        <!-- Неубиваемый подбор для виджета -->
+                        <picture>
+                            <source srcset="cyber-widget.JPG" type="image/jpeg">
+                            <source srcset="cyber-widget.JPEG" type="image/jpeg">
+                            <img src="cyber-widget.jpg" alt="Tech Background" class="avatar-img">
+                        </picture>
+                    </div>
+                    <div class="tech-line">ENVIRONMENT: <span>VS_CODE_PRO</span></div>
+                    <div class="tech-line">CORE STACK: <span>HTML5 / CSS3</span></div>
+                    <div class="tech-line">LAYOUT TYPE: <span>FLEX & GRID TECH</span></div>
+                    <div class="tech-line">COMPLIANCE: <span>W3C VALID</span></div>
+                </div>
+                <a href="https://kwork.ru" target="_blank" class="btn-neon" style="margin-top: 20px; display: block; text-decoration: none;">Открыть спецификации</a>
+            </div>
+        </section>
+
+        <section class="glass-panel">
+            <span class="section-tag">// DIGITAL_SIMULATIONS (ПОРТФОЛИО)</span>
+            
+            <div class="projects-grid">
+                
+                <!-- Карта 1: Премиум-Кафе -->
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <picture>
+                            <source srcset="cafe-bg.JPG" type="image/jpeg">
+                            <source srcset="cafe-bg.JPEG" type="image/jpeg">
+                            <img src="cafe-bg.jpg" alt="Premium Restaurant Cafe" class="avatar-img">
+                        </picture>
+                    </div>
+                    <div class="project-card__body">
+                        <div>
+                            <div class="p-code">MODULE_01 // ACTIVE</div>
+                            <div class="p-name">Премиум-Кафе</div>
+                        </div>
+                        <a href="cafe.html" class="btn-outline-project">Инициализация</a>
+                    </div>
+                </div>
+
+                <!-- Карта 2: Автосервис -->
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <picture>
+                            <source srcset="car-bg.JPG" type="image/jpeg">
+                            <source srcset="car-bg.JPEG" type="image/jpeg">
+                            <img src="car-bg.jpg" alt="Auto Repair Service" class="avatar-img">
+                        </picture>
+                    </div>
+                    <div class="project-card__body">
+                        <div>
+                            <div class="p-code">MODULE_02 // ACTIVE</div>
+                            <div class="p-name">Технологичный Автосервис</div>
+                        </div>
+                        <a href="car-service.html" class="btn-outline-project">Инициализация</a>
+                    </div>
+                </div>
+
+                <!-- Карта 3: Недвижимость -->
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <picture>
+                            <source srcset="estate-bg.JPG" type="image/jpeg">
+                            <source srcset="estate-bg.JPEG" type="image/jpeg">
+                            <img src="estate-bg.jpg" alt="Luxury Real Estate" class="avatar-img">
+                        </picture>
+                    </div>
+                    <div class="project-card__body">
+                        <div>
+                            <div class="p-code">MODULE_03 // ACTIVE</div>
+                            <div class="p-name">Элитная Недвижимость</div>
+                        </div>
+                        <a href="estate.html" class="btn-outline-project">Инициализация</a>
+                    </div>
+                </div>
+
+                <!-- Карта 4: Стритвир -->
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <picture>
+                            <source srcset="streetwear-bg.JPG" type="image/jpeg">
+                            <source srcset="streetwear-bg.JPEG" type="image/jpeg">
+                            <img src="streetwear-bg.jpg" alt="Streetwear Concept Drops" class="avatar-img">
+                        </picture>
+                    </div>
+                    <div class="project-card__body">
+                        <div>
+                            <div class="p-code">MODULE_04 // ACTIVE</div>
+                            <div class="p-name">Брутальный Стритвир</div>
+                        </div>
+                        <a href="streetwear.html" class="btn-outline-project">Инициализация</a>
+                    </div>
+                </div>
+
+                <!-- Карта 5: Кибербезопасность -->
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <picture>
+                            <source srcset="cyber-bg.JPG" type="image/jpeg">
+                            <source srcset="cyber-bg.JPEG" type="image/jpeg">
+                            <img src="cyber-bg.jpg" alt="Cyber Security Infrastructure" class="avatar-img">
+                        </picture>
+                    </div>
+                    <div class="project-card__body">
+                        <div>
+                            <div class="p-code">MODULE_05 // ACTIVE</div>
+                            <div class="p-name">Кибербезопасность & Веб</div>
+                        </div>
+                        <a href="cyber.html" class="btn-outline-project">Инициализация</a>
+                    </div>
+                </div>
+
+                <div class="project-card" style="border-style: dashed; background: transparent; border-color: rgba(255,255,255,0.05);">
+                    <div class="project-img-box" style="background: transparent; opacity: 0.1;">
+                        <img src="cyber-widget.jpg" alt="Empty Slot" class="avatar-img">
+                    </div>
+                    <div class="project-card__body">
+                        <div>
+                            <div class="p-code" style="color: #444;">MODULE_06 // STANDBY</div>
+                            <div class="p-name" style="color: #444;">Слот свободен</div>
+                        </div>
+                        <span class="btn-outline-project" style="border-color: rgba(255,255,255,0.02); color: #444; cursor: not-allowed;">Ожидание</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="workflow-block">
+            <div class="glass-panel">
+                <span class="section-tag">// INPUT_DATA_REQUIREMENTS</span>
+                <h3 style="font-size:15px; margin-bottom:20px; color:#fff; font-weight:900;">ДЛЯ НАЧАЛА РАБОТЫ ПРЕДОСТАВЬТЕ:</h3>
+                <ul class="step-list">
+                    <li>Техническое задание (ТЗ) или подробное описание вашей задачи (что должен делать сайт).</li>
+                    <li>Тексты, контакты и логотипы, которые необходимо разместить на страницах.</li>
+                    <li>Примеры сайтов конкурентов, дизайн которых вам нравится.</li>
+                    <li>Ваши пожелания по цветовой гамме и оформлению.</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel" style="display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(135deg, #16161a 0%, #0d0e15 100%);">
+                <span class="section-tag">// COMMUNICATION_GATEWAY</span>
+                <div style="margin: auto 0; padding: 15px 0;">
+                    <h2 style="font-size:22px; color:#fff; margin-bottom:10px; font-weight:900; text-transform: uppercase;">Готовы обсудить проект?</h2>
+                    <p style="font-size:13px; color:rgba(255,255,255,0.4); text-transform: uppercase;">Пишите, обсудим ваш продукт прямо сейчас!</p>
+                </div>
+                <a href="https://kwork.ru" target="_blank" class="btn-neon" style="display:block; text-decoration:none;">Инициализировать диалог</a>
+            </div>
+        </section>
+
+        <footer class="hud-footer">
+            <div>COORDINATES: [58.01° N, 56.25° E] // STARK_NET</div>
+            <div>© 2026 BAMBILIUS DIGITAL WORKSPACE. ALL RIGHTS SECURED.</div>
+        </footer>
+
+    </div>
+
+    <script>
+        const widget = document.querySelector('.hud-widget');
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 45;
+            const y = (window.innerHeight / 2 - e.pageY) / 45;
+            widget.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
